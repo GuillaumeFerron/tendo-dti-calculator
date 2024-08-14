@@ -3,7 +3,7 @@
     <div class="card-body px-5">
       <div class="d-flex justify-content-between align-items-center">
         <div>
-          <h3>Tendo IR Corrector</h3>
+          <h3>DtI Calculator</h3>
         </div>
         <div v-if="tooltipContent.length > 0" v-tooltip="{
           content: tooltipContent,
@@ -14,21 +14,23 @@
           <h3>ⓘ</h3>
         </div>
       </div>
-      -- Tool Here --
+      <DtiCalculator />
     </div>
   </div>
 </template>
 
 <script>
+import DtiCalculator from '../DtiCalculator.vue'
+
 export default {
   components: {
-    //
+    DtiCalculator
   },
   data() {
     return {
       tooltip: {
-        old: '',
-        guide: ''
+        old: 'https://docs.google.com/spreadsheets/d/14xuHU0B83wtoJ5pNWM4KhXqXmZsPOCtzmnG2qSPUHFU/edit?gid=1334544319#gid=1334544319',
+        guide: 'https://www.loom.com/share/9235038c43e44fe9b18913962e61db50'
       }
     }
   },
