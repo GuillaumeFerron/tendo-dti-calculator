@@ -63,7 +63,7 @@
 </template>
 
 <script>
-  const CACHE_KEY = 'TENDOPAY_IR_CORRECTOR'
+  const CACHE_KEY = 'TENDOPAY_DTI_CALCULATOR'
   const FORCE_CACHE = true
 
   export default {
@@ -125,7 +125,7 @@
           }
           if (!FORCE_CACHE) {
             this.clear()
-            console.log(`* DTI ADJUSTER: Invalidated cache`)
+            console.log(`* DTI CALCULATOR: Invalidated cache`)
           } else {
             const data = clear.data
             Object.keys(data || {}).forEach(_ => {
@@ -133,7 +133,7 @@
                 this.data[_] = data[_]
               }
             })
-            console.log(`* DTI ADJUSTER: Restored cache`)
+            console.log(`* DTI CALCULATOR: Restored cache`)
           }
         }
         this.cacheProcessed = true
