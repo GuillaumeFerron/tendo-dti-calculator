@@ -95,7 +95,8 @@
       computedSchedule () {
         return (this.data.schedule || '')
         .split(/\r?\n|\r|\n/g)
-          .map(_ => _.replace(/((₱ )|(,))/g, '').split(/\t/g))
+        .filter(_ => _.length > 0)
+        .map(_ => _.replace(/((₱ )|(,))/g, '').split(/\t/g))
       },
       scheduleWithAvailable () {
         return this.computedSchedule.map(_ => ([..._, Math.max(Math.ceil(((this.data.dti / 100) * this.data.netIncome / this.data.payroll - _[3]) * 100) / 100, 0)]))
