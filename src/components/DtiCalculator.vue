@@ -37,14 +37,10 @@
           amount
           the customer could avail if no pending payment (PHP{{ maxPayment }}). If none is highlighted, it means that the user will have to repay their last payment in order to avail a new loan.</i></small>
       <div class="my-2">
-        <table class="table table-striped table-sm">
+        <table class="table table-striped table-sm" id="schedule-table">
           <thead>
             <tr>
-              <th scope="col">Due</th>
-              <th scope="col">Amount</th>
-              <th scope="col">Penalty</th>
-              <th scope="col">Total Amount</th>
-              <th scope="col">Available Amount Once Due Repaid</th>
+              <th scope="col" v-for="header in headers" :key="`header-${header}`">{{ header }}</th>
             </tr>
           </thead>
           <tbody>
@@ -58,6 +54,10 @@
           </tbody>
         </table>
       </div>
+      <div class="mt-3 w-25">
+        <p class="py-1"></p>
+        <button class="form-control btn btn-primary" @click="copy">{{ copied ? 'Copied!' : 'Copy' }}</button>
+      </div>
     </div>
   </div>
 </template>
@@ -65,6 +65,13 @@
 <script>
   const CACHE_KEY = 'TENDOPAY_DTI_CALCULATOR'
   const FORCE_CACHE = true
+  const HEADERS = [
+    'Due',
+    'Amount',
+    'Penalty',
+    'Total Amount',
+    'Available Amount Once Due Repaid'
+  ]
 
   export default {
     data() {
@@ -75,7 +82,9 @@
           netIncome: null,
           schedule: null
         },
-        cacheProcessed: false
+        cacheProcessed: false,
+        headers: HEADERS,
+        copied: 0
       }
     },
     watch: {
@@ -148,6 +157,39 @@
           }
         })
         localStorage.removeItem(CACHE_KEY)
+      },
+      copy() {
+        if (!this.copied) {
+          const doc = document;
+          const text = doc.getElementById('schedule-table');
+          let range;
+          let selection;
+
+          if(doc.body.createTextRange) {
+
+              range = doc.body.createTextRange();
+              range.moveToElement(text);
+              range.select();
+
+          } else if (window.getSelection) {
+
+              selection = window.getSelection();
+
+              range = doc.createRange();
+              range.selectNodeContents(text);
+
+              selection.removeAllRanges();
+              selection.addRange(range);
+
+          }
+
+          document.execCommand('copy');
+          window.getSelection().removeAllRanges();
+          this.copied = true
+          setTimeout(() => {
+            this.copied = false
+          }, 700);
+        }
       }
     }
   }
