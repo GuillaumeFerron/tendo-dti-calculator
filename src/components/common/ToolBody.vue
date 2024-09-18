@@ -30,7 +30,7 @@ export default {
     return {
       tooltip: {
         old: 'https://docs.google.com/spreadsheets/d/14xuHU0B83wtoJ5pNWM4KhXqXmZsPOCtzmnG2qSPUHFU/edit?gid=1334544319#gid=1334544319',
-        guide: 'https://www.loom.com/share/9235038c43e44fe9b18913962e61db50'
+        guide: 'https://scribehow.com/shared/Copying_Data_to_Tendo_DTI_Calculator__707UvZKdR8KpomOZi4thew'
       }
     }
   },
