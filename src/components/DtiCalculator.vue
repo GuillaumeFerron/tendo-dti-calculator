@@ -150,7 +150,7 @@
           const amount = Math.max(Math.ceil(((this.data.dti / 100) * this.data.netIncome / this.data.payroll - _[3]) * 100) / 100, 0)
           cumulative += amount
           return [..._,
-            Math.min(cumulative, this.actualCl)
+            Math.min(cumulative, this.actualCl || cumulative)
           ]
         })
       },
@@ -158,7 +158,7 @@
         return Math.min(this.scheduleWithAvailable.reduce((acc, _) => acc >= _[4] ? acc : _[4], 0), this.actualCl)
       },
       actualCl() {
-        return Math.min(this.data.tendoCl, this.data.tonikCl)
+        return Math.min(this.data.tendoCl || this.data.tonikCl, this.data.tonikCl || this.data.tendoCl)
       },
       totalDue() {
         return this.scheduleWithAvailable.reduce((acc, _) => acc + parseFloat(_[3]), 0)
