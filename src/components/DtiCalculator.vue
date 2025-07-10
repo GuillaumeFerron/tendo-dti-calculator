@@ -155,7 +155,7 @@
         })
       },
       maxPayment() {
-        return Math.min(this.scheduleWithAvailable.reduce((acc, _) => acc >= _[4] ? acc : _[4], 0), this.actualCl)
+        return this.scheduleWithAvailable.reduce((acc, _) => acc >= _[4] ? acc : _[4], 0)
       },
       actualCl() {
         return Math.min(this.data.tendoCl || this.data.tonikCl, this.data.tonikCl || this.data.tendoCl)
